@@ -28,4 +28,6 @@ class NewsContentModel extends Model{
         return $this->_db->add($data);
     }
 
+
+
 }

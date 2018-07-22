@@ -66,3 +66,24 @@ function showKind($status, $data)
 function getLoginUsername(){
     return $_SESSION['adminUser']['username'] ? $_SESSION['adminUser']['username'] : '';
 }
+
+function getCatName($navs, $catid){
+    foreach($navs as $nav){
+        if ($nav['menu_id'] == $catid){
+            return $nav['name'];
+        }
+    }
+}
+
+function getCopyFrom($id){
+    $fromList = C('COPY_FROM');
+    return $fromList[$id] ? $fromList[$id] : '';
+}
+
+function isThumb($thumb){
+    if($thumb){
+        return '<span style="color:red">有</span>';
+    }else{
+        return '无';
+    }
+}

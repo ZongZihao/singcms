@@ -5,6 +5,30 @@ use Think\Controller;
 
 class ContentController extends Controller{
     public function index(){
+        $conds = array();
+        $title = $_GET['title'];
+        $catid = $_GET['catid'];
+        if($title){
+            $conds['title'] = $title;
+        }
+        if($catid){
+            $conds['catid'] = intval($catid);
+        }
+
+        $page = $_REQUEST['p'] ? $_REQUEST['p'] : 1;
+        $pageSize= 2;
+        $conds['status'] = array('neq', -1);
+
+        $newsCount = D('News')->getNewsCount($conds);
+        $news = D('News')->getNews($conds, $page, $pageSize);
+
+        $res = new \Think\Page($newsCount, $pageSize);
+        $pageres = $res->show();
+
+        $this->assign('news', $news);
+        $this->assign('pageres', $pageres);
+        $this->assign('webSiteMenu', D('Menu')->getBarMenus());
+        $this->assign('conds', $conds);
         $this->display();
     }
 
@@ -34,7 +58,7 @@ class ContentController extends Controller{
                 }
             }
         }else {
-            $webSiteMenu = D('Menu')->getBarMenu();
+            $webSiteMenu = D('Menu')->getBarMenus();
             $titleFontColor = C('TITLE_FONT_COLOR');
             $copyFrom = C('COPY_FROM');
             $this->assign('webSiteMenu', $webSiteMenu);

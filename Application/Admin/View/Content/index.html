@@ -31,10 +31,10 @@
             <div class="input-group">
               <span class="input-group-addon">栏目</span>
               <select class="form-control" name="catid">
-                <option value='' >全部分类</option>
-                
-                <option value="" ></option>
-                
+                <option value='' selected="selected">全部分类</option>
+                <volist name="webSiteMenu" id="sitenav">
+                  <option value="{$sitenav.menu_id}" <eq name="conds.catid" value="$sitenav.menu_id">selected="selected"</eq>>{$sitenav.name}</option>
+                </volist>
               </select>
             </div>
           </div>
@@ -42,7 +42,7 @@
           <input type="hidden" name="a" value="index"/>
           <div class="col-md-3">
             <div class="input-group">
-              <input class="form-control" name="title" type="text" value="" placeholder="文章标题" />
+              <input class="form-control" name="title" type="text" value="{$conds.title}" placeholder="文章标题" />
                 <span class="input-group-btn">
                   <button id="sub_data" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
                 </span>
@@ -71,19 +71,19 @@
                 </tr>
                 </thead>
                 <tbody>
-                
+                <volist name="news" id="new">
                   <tr>
                     <td><input type="checkbox" name="pushcheck" value="{$new.news_id}"></td>
-                    <td><input size=4 type='text'  name='' value=""/></td><!--6.7-->
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><input size=4 type='text'  name='listorder' value="{$new.listorder}"/></td><!--6.7-->
+                    <td>{$new.news_id}</td>
+                    <td>{$new.title}</td>
+                    <td>{$new.catid|getCatName=$webSiteMenu,###}</td>
+                    <td>{$new.copyfrom|getCopyFrom}</td>
                     <td>
-                      
+                      {$new.thumb|isThumb}
                     </td>
-                    <td></td>
-                    <td><span  attr-status=""  attr-id="" class="sing_cursor singcms-on-off" id="singcms-on-off" ></span></td>
+                    <td>{$new.create_time|date='Y-m-d H:i', ###}</td>
+                    <td><span  attr-status=""  attr-id="" class="sing_cursor singcms-on-off" id="singcms-on-off" >{$new.status|status}</span></td>
                     <td><span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="" ></span>
                       <a href="javascript:void(0)" id="singcms-delete"  attr-id=""  attr-message="删除">
                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
@@ -91,10 +91,12 @@
 
                     </td>
                   </tr>
-                
+                </volist>
+
 
                 </tbody>
               </table>
+              {$pageres}
               <nav>
 
               <ul >
@@ -104,6 +106,7 @@
             </nav>
               
             </form>
+
 
           </div>
         </div>

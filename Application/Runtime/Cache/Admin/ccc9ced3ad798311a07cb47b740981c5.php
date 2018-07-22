@@ -110,10 +110,8 @@
             <div class="input-group">
               <span class="input-group-addon">栏目</span>
               <select class="form-control" name="catid">
-                <option value='' >全部分类</option>
-                
-                <option value="" ></option>
-                
+                <option value='' selected="selected">全部分类</option>
+                <?php if(is_array($webSiteMenu)): $i = 0; $__LIST__ = $webSiteMenu;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$sitenav): $mod = ($i % 2 );++$i;?><option value="<?php echo ($sitenav["menu_id"]); ?>" <?php if(($conds["catid"]) == $sitenav["menu_id"]): ?>selected="selected"<?php endif; ?>><?php echo ($sitenav["name"]); ?></option><?php endforeach; endif; else: echo "" ;endif; ?>
               </select>
             </div>
           </div>
@@ -121,7 +119,7 @@
           <input type="hidden" name="a" value="index"/>
           <div class="col-md-3">
             <div class="input-group">
-              <input class="form-control" name="title" type="text" value="" placeholder="文章标题" />
+              <input class="form-control" name="title" type="text" value="<?php echo ($conds["title"]); ?>" placeholder="文章标题" />
                 <span class="input-group-btn">
                   <button id="sub_data" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
                 </span>
@@ -150,30 +148,30 @@
                 </tr>
                 </thead>
                 <tbody>
-                
-                  <tr>
+                <?php if(is_array($news)): $i = 0; $__LIST__ = $news;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$new): $mod = ($i % 2 );++$i;?><tr>
                     <td><input type="checkbox" name="pushcheck" value="<?php echo ($new["news_id"]); ?>"></td>
-                    <td><input size=4 type='text'  name='' value=""/></td><!--6.7-->
-                    <td></td>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td><input size=4 type='text'  name='listorder' value="<?php echo ($new["listorder"]); ?>"/></td><!--6.7-->
+                    <td><?php echo ($new["news_id"]); ?></td>
+                    <td><?php echo ($new["title"]); ?></td>
+                    <td><?php echo (getCatName($webSiteMenu,$new["catid"])); ?></td>
+                    <td><?php echo (getCopyFrom($new["copyfrom"])); ?></td>
                     <td>
-                      
+                      <?php echo (isThumb($new["thumb"])); ?>
                     </td>
-                    <td></td>
-                    <td><span  attr-status=""  attr-id="" class="sing_cursor singcms-on-off" id="singcms-on-off" ></span></td>
+                    <td><?php echo (date('Y-m-d H:i', $new["create_time"])); ?></td>
+                    <td><span  attr-status=""  attr-id="" class="sing_cursor singcms-on-off" id="singcms-on-off" ><?php echo (status($new["status"])); ?></span></td>
                     <td><span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="" ></span>
                       <a href="javascript:void(0)" id="singcms-delete"  attr-id=""  attr-message="删除">
                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                       </a>
 
                     </td>
-                  </tr>
-                
+                  </tr><?php endforeach; endif; else: echo "" ;endif; ?>
+
 
                 </tbody>
               </table>
+              <?php echo ($pageres); ?>
               <nav>
 
               <ul >
@@ -183,6 +181,7 @@
             </nav>
               
             </form>
+
 
           </div>
         </div>
