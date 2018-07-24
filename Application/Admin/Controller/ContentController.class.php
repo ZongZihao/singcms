@@ -68,4 +68,8 @@ class ContentController extends Controller{
             $this->display();
         }
     }
+
+    public function edit(){
+        echo 1;
+    }
 }

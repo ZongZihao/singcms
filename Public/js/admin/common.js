@@ -33,9 +33,10 @@ $("#singcms-button-submit").click(function () {
     }, 'json')
 })
 
+//绑定编辑按钮操作
 $(".singcms-table #singcms-edit").on('click', function () {
     var id = $(this).attr('attr-id');
-    var url = SCOPE.edit_url;
+    var url = SCOPE.edit_url + '?id=' + id;
     window.location.href = url;
 })
 
