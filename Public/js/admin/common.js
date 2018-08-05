@@ -33,12 +33,18 @@ $("#singcms-button-submit").click(function () {
     }, 'json')
 })
 
+/**
+ * 编辑模型
+ */
 $(".singcms-table #singcms-edit").on('click', function () {
     var id = $(this).attr('attr-id');
     var url = SCOPE.edit_url;
     window.location.href = url;
 })
 
+/**
+ * 删除操作
+ */
 $('.singcms-table #singcms-delete').on('click',function() {
     var id = $(this).attr('attr-id');
     var url = SCOPE.set_status_url + '?id=' + id;
