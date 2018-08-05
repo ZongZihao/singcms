@@ -27,6 +27,7 @@ $("#singcms-button-submit").click(function () {
             return dialog.success(result.message, jump_url);
         } else if (result.status == 0) {
             //失败
+            console.log(result.message);
             return dialog.error(result.message);
         }
 
@@ -81,7 +82,8 @@ function todelete(url, data){
         if(result.status == 1){
             return dialog.success(result.message, '');
         }else{
-            return dialog.error(result.messge);
+            console.log(result.message);
+            return dialog.error(result.message);
         }
     },'json')
 }
@@ -107,4 +109,30 @@ $("#button-listorder").click(function(){
             return dialog.error(result.message, result['data']['jump_url']);
         }
     }, 'json');
+});
+
+/**
+ * 修改操作
+ */
+$('.singcms-table #singcms-on-off').on('click', function(){
+    var id = $(this).attr('attr-id');
+    var status = $(this).attr('attr-status');
+    var url = SCOPE.set_status_url;
+
+    data = {};
+    data['id'] = id;
+    data['status'] = status;
+
+    layer.open({
+        type : 0,
+        title : '是否提交?',
+        btn : ['yes', 'no'],
+        icon : 3,
+        closeBtn : 2,
+        content : '是否确定更改状态',
+        scrollbar : true,
+        yes: function(){
+            todelete(url, data);
+        }
+    })
 })

@@ -159,9 +159,9 @@
                       <?php echo (isThumb($new["thumb"])); ?>
                     </td>
                     <td><?php echo (date('Y-m-d H:i', $new["create_time"])); ?></td>
-                    <td><span  attr-status=""  attr-id="" class="sing_cursor singcms-on-off" id="singcms-on-off" ><?php echo (status($new["status"])); ?></span></td>
+                    <td><span  attr-status="<?php if($new["status"] == 1): ?>0<?php else: ?>1<?php endif; ?>"  attr-id="<?php echo ($new["news_id"]); ?>" class="sing_cursor singcms-on-off" id="singcms-on-off" ><?php echo (status($new["status"])); ?></span></td>
                     <td><span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="<?php echo ($new["news_id"]); ?>" ></span>
-                      <a href="javascript:void(0)" id="singcms-delete"  attr-id=""  attr-message="删除">
+                      <a href="javascript:void(0)" id="singcms-delete"  attr-id="<?php echo ($new["news_id"]); ?>"  attr-message="删除">
                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                       </a>
 
@@ -203,7 +203,7 @@
   var SCOPE = {
     'edit_url' : '/admin/content/edit',
     'add_url' : '/admin/content/add',
-    'set_status_url' : '/admin.php?c=content&a=setStatus',
+    'set_status_url' : '/admin/content/setStatus',
     'sing_news_view_url' : '/index.php?c=view',
     'listorder_url' : '/admin.php?c=content&a=listorder',
     'push_url' : '/admin.php?c=content&a=push',
