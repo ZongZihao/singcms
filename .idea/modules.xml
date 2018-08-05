@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/singcms.iml" filepath="$PROJECT_DIR$/.idea/singcms.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../tp/.idea/tp.iml" filepath="$PROJECT_DIR$/../tp/.idea/tp.iml" />
     </modules>
   </component>
 </project>
