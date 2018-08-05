@@ -6,6 +6,7 @@
  * Time: 21:14
  */
 namespace Common\Model;
+use Think\Exception;
 use Think\Model;
 
 class NewsContentModel extends Model{
@@ -28,6 +29,22 @@ class NewsContentModel extends Model{
         return $this->_db->add($data);
     }
 
+    public function find($id){
+        return $this->_db->where('news_id=' . $id)->find();
+    }
 
+    public function updateNewsById($id, $data){
+        if(!$id || !is_numeric($id)){
+            throw new exception('ID不合法');
+        }
+        if(!$data || !is_array($data)){
+            throw new exception('数据不合法');
+        }
+        if(isset($data['content']) && $data['content']){
+            $data['content'] = htmlspecialchars($data['content']);
+        }
+
+        return $this->_db->where('news_id=' . $id)->save($data);
+    }
 
 }

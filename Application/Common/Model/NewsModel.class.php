@@ -1,6 +1,7 @@
 <?php
 namespace Common\Model;
 use Think\Model;
+use Think\Exception;
 /**
  * Created by PhpStorm.
  * User: Administrator
@@ -54,6 +55,22 @@ class NewsModel extends Model {
             $conditions['cat_id'] = intval($data['cat_id']);
         }
         return $this->_db->where($conditions)->count();
+    }
+
+    public function find($id){
+        $data = $this->_db->where('news_id='. $id)->find();
+        return $data;
+    }
+
+    public function updateById($id, $data){
+        if(!$id || !is_numeric($id)){
+            throw_exception('ID不合法');
+        }
+        if(!$data || !is_array($data)){
+            throw_exception('数据不合法');
+        }
+
+        return $this->_db->where('news_id=' . $id)->save($data);
     }
 
 }
