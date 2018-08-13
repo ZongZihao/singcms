@@ -131,4 +131,28 @@ class ContentController extends Controller{
             return show(0, $e->getMessage());
         }
     }
+
+    public function listorder() {
+        $listorder = $_POST['listorder'];
+        $jumpUrl =$_SERVER['HTTP_REFERER'];
+        $errors = array();
+        try {
+            if ($listorder) {
+                foreach ($listorder as $newsId => $v) {
+                    // 执行更新操作
+                    $id = D('News')->updateNewsListorderById($newsId, $v);
+                    if ($id === false) {
+                        $error[] = $newsId;
+                    }
+                }
+                if ($error) {
+                    return show(0, '排序失败-' . implode(',', $errors), array('jump_url' => $jumpUrl));
+                }
+                return show(1, '排序成功', array('jump_url' => $jumpUrl));
+            }
+        }catch(\Exception $e){
+            return show(0, $e->getMessage());
+        }
+        return show(0, '排序数据失败', array('jump_url' => $jumpUrl));
+    }
 }

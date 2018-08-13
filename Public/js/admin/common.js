@@ -94,18 +94,22 @@ function todelete(url, data){
 $("#button-listorder").click(function(){
     //获取listorder内容
     var data = $("#singcms-listorder").serializeArray();
+    console.log(data);
     postData = {};
     $(data).each(function(i){
         postData[this.name] = this.value;
     })
+    console.log(postData);
 
     var url = SCOPE.listorder_url;
     $.post(url, data, function(result){
+        // console.log(result);
         if(result.status == 1){
             //success
             console.log(result);
             return dialog.success(result.message, result['data']['jump_url']);
-        }else if(result == 0){
+        }else if(result.status == 0){
+            // console.log(result);
             return dialog.error(result.message, result['data']['jump_url']);
         }
     }, 'json');

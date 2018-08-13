@@ -48,4 +48,6 @@ class NewsContentModel extends Model{
     }
 
 
+
+
 }
