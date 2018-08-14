@@ -141,7 +141,7 @@
                             <table class="table table-bordered table-hover singcms-table">
                                 <thead>
                                 <tr>
-                                    <!--<th id="singcms-checkbox-all" width="10"><input type="checkbox"/></th>-->
+                                    <th id="singcms-checkbox-all" width="10"><input type="checkbox"/></th>
                                     <th width="14">排序</th>
                                     <th>id</th>
                                     <th>标题</th>
@@ -155,7 +155,7 @@
                                 </thead>
                                 <tbody>
                                 <?php if(is_array($news)): $i = 0; $__LIST__ = $news;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$new): $mod = ($i % 2 );++$i;?><tr>
-                                        <!--<td><input type="checkbox" name="pushcheck" value="<?php echo ($new["news_id"]); ?>"></td>-->
+                                        <td><input type="checkbox" name="pushcheck" value="<?php echo ($new["news_id"]); ?>"></td>
                                         <td><input size=4 type='text' name='listorder[<?php echo ($new["news_id"]); ?>]' value="<?php echo ($new["listorder"]); ?>"/></td>
                                         <!--6.7-->
                                         <td><?php echo ($new["news_id"]); ?></td>
@@ -196,6 +196,13 @@
                             </div>
 
                         </form>
+                        <div class="input-group">
+                            <select class="form-control" name="position_id" id="select-push">
+                                <option value="0">请选择推荐位进行推送</option>
+                                <?php if(is_array($position)): foreach($position as $key=>$position): ?><option value="<?php echo ($position["id"]); ?>"><?php echo ($position["name"]); ?></option><?php endforeach; endif; ?>
+                            </select>
+                            <button id="singcms-push" type="button" class="btn btn-primary">推送</button>
+                        </div>
 
 
                     </div>

@@ -16,7 +16,7 @@ class ContentController extends Controller{
         }
 
         $page = $_REQUEST['p'] ? $_REQUEST['p'] : 1;
-        $pageSize= 2;
+        $pageSize= 4;
         $conds['status'] = array('neq', -1);
 
         $newsCount = D('News')->getNewsCount($conds);
@@ -25,6 +25,9 @@ class ContentController extends Controller{
         $res = new \Think\Page($newsCount, $pageSize);
         $pageres = $res->show();
 
+        $positions = D('Position')->getNormalPositions();
+
+        $this->assign('position', $positions);
         $this->assign('news', $news);
         $this->assign('pageres', $pageres);
         $this->assign('webSiteMenu', D('Menu')->getBarMenus());
