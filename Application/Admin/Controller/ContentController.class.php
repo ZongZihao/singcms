@@ -183,9 +183,9 @@ class ContentController extends Controller{
                     'position_id' => $positionId,
                     'title' => $new['title'],
                     'thumb' => $new['thumb'],
-                    'news_id' => $new['new_id'],
+                    'news_id' => $new['news_id'],
                     'status' => 1,
-                    'creat_time' => $new['create_time'],
+                    'create_time' => $new['create_time'],
                 );
                 $position = D('PositionContent')->insert($data);
             }

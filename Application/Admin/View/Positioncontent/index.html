@@ -30,7 +30,9 @@
                     <div class="input-group">
                         <span class="input-group-addon">推荐位</span>
                         <select class="form-control" name="position_id">
-                                <option value=""></option>
+                            <foreach name="positions" item="position">
+                                <option value="{$position.id}" <if condition="$position['id'] eq $positionId">selected="selected"</if>">{$position.name}</option>
+                            </foreach>
                         </select>
                     </div>
                 </div>
@@ -38,7 +40,7 @@
                 <input type="hidden" name="a" value="index"/>
                 <div class="col-md-3">
                     <div class="input-group">
-                        <input class="form-control" name="title" type="text" value="" placeholder="文章标题" />
+                        <input class="form-control" name="title" type="text" value="{$title}" placeholder="文章标题" />
                 <span class="input-group-btn">
                   <button id="sub_data" type="submit" class="btn btn-primary"><i class="glyphicon glyphicon-search"></i></button>
                 </span>
@@ -65,22 +67,24 @@
                         </tr>
                         </thead>
                         <tbody>
+                            <volist name="contents" id="vo">
                             <tr>
                                 <td><input size=4 type='text'  name='' value=""/></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
+                                <td>{$vo.id}</td>
+                                <td>{$vo.title}</td>
+                                <td>{$vo.create_time|date="Y-m-d H:i",###}</td>
+                                <td>{$vo.thumb|isThumb}</td>
                                 <td>
-                                    <span  attr-status="0"  attr-id="" class="sing_cursor singcms-on-off" id="singcms-on-off" ></span>
+                                    <span  attr-status="<if condition='$vo["status"] eq 1'>1<else/>0</if>"  attr-id="" class="sing_cursor singcms-on-off" id="singcms-on-off" >{$vo.status|status}</span>
                                 </td>
                                 <td>
-                                    <span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="" ></span>
-                                    <a href="javascript:void(0)" id="singcms-delete"  attr-id=""  attr-message="删除">
+                                    <span class="sing_cursor glyphicon glyphicon-edit" aria-hidden="true" id="singcms-edit" attr-id="{$vo.id}" ></span>
+                                    <a href="javascript:void(0)" id="singcms-delete"  attr-id="{$vo.id}"  attr-message="删除">
                                         <span class="glyphicon glyphicon-remove-circle" aria-hidden="true"></span>
                                     </a>
                                 </td>
                             </tr>
+                            </volist>
 
                         </tbody>
                     </table>
@@ -106,9 +110,9 @@
 <!-- /#wrapper -->
 <script>
     var SCOPE = {
-        'edit_url' : '/admin.php?c=positioncontent&a=edit',
-        'set_status_url' : '/admin.php?c=positioncontent&a=setStatus',
-        'add_url' : '/admin.php?c=positioncontent&a=add',
+        'edit_url' : '/admin/positioncontent/edit',
+        'set_status_url' : '/admin/positioncontent/setStatus',
+        'add_url' : '/admin/positioncontent/add',
         'listorder_url' : '/admin.php?c=positioncontent&a=listorder',
     }
 
