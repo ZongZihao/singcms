@@ -140,3 +140,33 @@ $('.singcms-table #singcms-on-off').on('click', function(){
         }
     })
 })
+
+/**
+ * 推送JS相关
+ */
+
+$("#singcms-push").click(function(){
+    var id = $("#select-push").val();
+    if (id == 0){
+        return dialog.error("请选择推荐位");
+    }
+    var push = {};
+    var postData = {};
+    $("input[name='pushcheck']:checked").each(function(i){
+        push[i] = $(this).val();
+    })
+
+    postData['push'] = push;
+    postData['position_id'] = id;
+    console.log(postData);
+    var url = SCOPE.push_url;
+
+    $.post(url, postData, function(result){
+        if(result.status == 1){
+            return dialog.success(result.message, result['data']['jump_url']);
+        }
+        if(result.status == 0){
+            return dialog.error(result.message);
+        }
+    }, 'json')
+})

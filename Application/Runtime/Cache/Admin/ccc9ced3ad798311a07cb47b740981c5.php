@@ -227,7 +227,7 @@
         'set_status_url': '/admin/content/setStatus',
         'sing_news_view_url': '/index.php?c=view',
         'listorder_url': '/admin/content/listorder',
-        'push_url': '/admin.php?c=content&a=push',
+        'push_url': '/admin/content/push',
     }
 </script>
 <script src="/Public/js/admin/common.js"></script>
