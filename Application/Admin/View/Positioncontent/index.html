@@ -69,7 +69,7 @@
                         <tbody>
                             <volist name="contents" id="vo">
                             <tr>
-                                <td><input size=4 type='text'  name='' value=""/></td>
+                                <td><input size=4 type='text'  name='listorder[{$vo.id}]' value="{$vo.listorder}"/></td>
                                 <td>{$vo.id}</td>
                                 <td>{$vo.title}</td>
                                 <td>{$vo.create_time|date="Y-m-d H:i",###}</td>
@@ -113,7 +113,7 @@
         'edit_url' : '/admin/positioncontent/edit',
         'set_status_url' : '/admin/positioncontent/setStatus',
         'add_url' : '/admin/positioncontent/add',
-        'listorder_url' : '/admin.php?c=positioncontent&a=listorder',
+        'listorder_url' : '/admin/positioncontent/listorder',
     }
 
 </script>
